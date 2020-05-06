@@ -85,11 +85,28 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  //my new article
+  {
+    title: 'Franciscos SALT farm',
+    date: '5 26 2020',
+    firstParagraph: `salt hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
-/* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
-  
+/* Step 1: Create a function that creates a component. You will want your component to look like the template below:
+
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -99,6 +116,7 @@ const data = [
     <span class='expandButton'></span>
   </div>
 
+  
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
@@ -112,3 +130,80 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+//STEP 1
+
+//Function for data attributes of data array\\
+function makeData(dataAttrs) {
+  const { title, date, firstParagraph, secondParagraph, thirdParagraph } = dataAttrs;
+
+
+//          Consts createElement        \\
+  const article = document.createElement('div')
+  const titleh2 = document.createElement('h2')
+  const datep = document.createElement('p')
+  const firstP = document.createElement('p')
+  const secondP = document.createElement('p')
+  const thirdP = document.createElement('p')
+  const expandButton = document.createElement('span')
+
+  //      appendChild       \\
+article.appendChild(titleh2)
+article.appendChild(datep)
+article.appendChild(datep)
+article.appendChild(firstP)
+article.appendChild(secondP)
+article.appendChild(thirdP)
+article.appendChild(expandButton)
+
+//      adding class list          \\
+
+article.classList.add('article')
+datep.classList.add('date')
+expandButton.classList.add('expandButton')
+//adding text content
+titleh2.textContent = title
+datep.textContent = date 
+firstP.textContent =firstParagraph
+secondP.textContent = secondParagraph 
+thirdP.textContent = thirdParagraph
+expandButton.textContent = 'CLICKY'
+
+//            STEP 2             \\
+expandButton.addEventListener('click', event => {
+  article.classList.toggle('article-open')
+
+})
+
+   //        STEP 3         \\
+return article ;
+}
+
+                  //TEST configuration\\
+
+// const miniarticle =  makeData({ title:'anything', date:'420', firstParagraph:'fuckthis1', secondParagraph:'fuckthis2', thirdParagraph:'fuckthis3' }) ;
+// console.log(miniarticle);
+// document.querySelector('body').appendChild(miniarticle);
+
+
+         //         STEP 4          \\
+
+
+const dataMap = data.map((arrayItem) => {
+      let newMap = makeData(arrayItem);
+
+      return newMap;
+
+});
+
+dataMap.forEach(component => {
+
+  document.querySelector('.articles').appendChild(component);
+});
+
+//            STEP 5            \\
+
+const miniarticle =  makeData({ title:'anything', date:'420', firstParagraph:'GFHGFDthis1', secondParagraph:'GTRGFDthis2', thirdParagraph:'fGHFDHthis3' })
+
+dataMap.push(document.querySelector('.articles').appendChild(miniarticle))
+
